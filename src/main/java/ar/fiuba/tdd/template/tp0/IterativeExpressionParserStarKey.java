@@ -1,7 +1,7 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class IterativeExpressionParserStarKey extends ChainExpressionParser {
-    String parseableSymbol = "*";
+public class IterativeExpressionParserStarKey extends SymbolExpressionParser {
+
     int maxIterations = 20;
     int minIterations = 0;
 
@@ -14,18 +14,15 @@ public class IterativeExpressionParserStarKey extends ChainExpressionParser {
     }
 
     @Override
-    protected boolean canIParse(ParseableExpression expression) {
-        return (parseableSymbol.compareTo(expression.getCurrentChar()) == 0);
+    protected String getParseableSymbol() {
+        return "*";
     }
 
     @Override
     protected Expression parse(ParseableExpression expression, Expression lastExpression) {
-        if (canIParse(expression)) {
-            expression.getNextChar();
-            return new IterativeExpression(lastExpression, minIterations, maxIterations);
-        }
-
-        return null;
+        expression.getNextChar();
+        lastExpression.setDisabled(true);
+        return new IterativeExpression(lastExpression, minIterations, maxIterations);
     }
 }
 

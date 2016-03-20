@@ -1,7 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class RandomExpressionParser extends ChainExpressionParser {
-    String parseableSymbol = ".";
+public class RandomExpressionParser extends SymbolExpressionParser {
 
     public RandomExpressionParser(ChainExpressionParser nextExpression) {
         super(nextExpression);
@@ -12,17 +11,13 @@ public class RandomExpressionParser extends ChainExpressionParser {
     }
 
     @Override
-    protected boolean canIParse(ParseableExpression expression) {
-        return (parseableSymbol.compareTo(expression.getCurrentChar()) == 0);
+    protected String getParseableSymbol() {
+        return ".";
     }
 
     @Override
     protected Expression parse(ParseableExpression expression, Expression lastExpression) {
-        if (canIParse(expression)) {
-            expression.getNextChar();
-            return new RandomExpression();
-        }
-
-        return null;
+        expression.getNextChar();
+        return new RandomExpression();
     }
 }

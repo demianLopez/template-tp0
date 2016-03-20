@@ -1,8 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class LiteralExpressionParser extends ChainExpressionParser {
-
-    String parseableSymbol = "\\";
+public class LiteralExpressionParser extends SymbolExpressionParser {
 
     public LiteralExpressionParser(ChainExpressionParser nextExpression) {
         super(nextExpression);
@@ -13,18 +11,13 @@ public class LiteralExpressionParser extends ChainExpressionParser {
     }
 
     @Override
-    protected boolean canIParse(ParseableExpression expression) {
-        return (parseableSymbol.compareTo(expression.getCurrentChar()) == 0);
+    protected String getParseableSymbol() {
+        return "\\";
     }
 
     @Override
     protected Expression parse(ParseableExpression expression, Expression lastExpression) {
-
-        if (canIParse(expression)) {
-            expression.getNextChar();
-            return new SimpleExpression(expression.getNextChar());
-        }
-
-        return null;
+        expression.getNextChar();
+        return new SimpleExpression(expression.getNextChar());
     }
 }

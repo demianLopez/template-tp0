@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class IterativeExpression implements Expression {
+public class IterativeExpression extends Expression {
 
     Expression expression;
     int numberOfMaxIterations;
@@ -13,9 +13,11 @@ public class IterativeExpression implements Expression {
     }
 
     @Override
-    public String generateExpression() {
+    public String buildExpression() {
         String finalExpression = "";
         int numberOfIterations = (int) (numberOfMinIterations + Math.random() * (numberOfMaxIterations - numberOfMinIterations + 1));
+
+        expression.setDisabled(false);
 
         for (int i = 0; i < numberOfIterations; i++) {
             finalExpression += expression.generateExpression();

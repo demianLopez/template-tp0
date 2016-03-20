@@ -1,6 +1,6 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class SimpleExpression implements Expression {
+public class SimpleExpression extends Expression {
     String expression;
 
     public SimpleExpression(String expression) {
@@ -8,7 +8,7 @@ public class SimpleExpression implements Expression {
     }
 
     @Override
-    public String generateExpression() {
+    public String buildExpression() {
         return expression;
     }
 }

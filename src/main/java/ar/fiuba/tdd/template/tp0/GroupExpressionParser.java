@@ -1,40 +1,38 @@
 package ar.fiuba.tdd.template.tp0;
 
-public class GroupExpressionParser extends ChainExpressionParser {
+public class GroupExpressionParser extends SymbolExpressionParser {
 
-    String parseableSymbol = "[";
     String endParseSymbol = "]";
 
     public GroupExpressionParser(ChainExpressionParser nextExpression) {
         super(nextExpression);
     }
+
     public GroupExpressionParser() {
         super(null);
     }
 
     @Override
-    protected boolean canIParse(ParseableExpression expression) {
-        return (parseableSymbol.compareTo(expression.getCurrentChar()) == 0);
+    protected String getParseableSymbol() {
+        return "[";
     }
 
     @Override
     protected Expression parse(ParseableExpression expression, Expression lastExpression) {
-        if (canIParse(expression)) {
-            RegularExpressionGenerator regularExpressionGenerator = new RegularExpressionGenerator();
 
-            expression.getNextChar();
-            String currentChar = expression.getNextChar();
+        RegularExpressionGenerator regularExpressionGenerator = new RegularExpressionGenerator();
 
-            GroupExpression groupExpression = new GroupExpression();
+        expression.getNextChar();
+        String currentChar = expression.getNextChar();
 
-            while (currentChar.compareTo(endParseSymbol) != 0) {
-                groupExpression.addExpression(regularExpressionGenerator.generateExpression(currentChar));
-                currentChar = expression.getNextChar();
-            }
+        GroupExpression groupExpression = new GroupExpression();
 
-            return groupExpression;
+        while (currentChar.compareTo(endParseSymbol) != 0) {
+            groupExpression.addExpression(regularExpressionGenerator.generateExpression(currentChar));
+            currentChar = expression.getNextChar();
         }
 
-        return null;
+        return groupExpression;
+
     }
 }

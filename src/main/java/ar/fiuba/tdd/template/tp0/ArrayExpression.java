@@ -3,7 +3,7 @@ package ar.fiuba.tdd.template.tp0;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class ArrayExpression implements Expression {
+public class ArrayExpression extends Expression {
     ArrayList<Expression> expressionArray;
 
     public ArrayExpression() {
@@ -15,7 +15,7 @@ public class ArrayExpression implements Expression {
     }
 
     @Override
-    public String generateExpression() {
+    public String buildExpression() {
         Iterator<Expression> expressionIterator = expressionArray.iterator();
         String finalExpression = "";
 
